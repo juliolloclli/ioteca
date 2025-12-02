@@ -1,0 +1,17 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta ht="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+</head>
+<body>
+    Hola p4merge lo maximo<br> 
+<<<<<<< HEAD
+    desde mi ordenador<br>
+=======
+    add commit
+>>>>>>> 4a4e015a0e96b11ccdda93353a587cbf50c9a2b6
+    linea 9 pr ahora
+</body>
+</html>
