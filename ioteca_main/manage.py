@@ -5,7 +5,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    print("🔧 Ejecutando el administrador de Django...")  # ← Pequeña modificación
+    print("🚀 Iniciando servidor Django...")
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ioteca_main.settings')
     try:
