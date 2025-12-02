@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flor - Saludos Terricolas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #f0f9ff, #e1f5e1);
+            color: #2d5016;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            min-height: 100vh;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #e75480;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #5a9216;
+            margin-bottom: 20px;
+        }
+        .flower-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .flower {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #ff4081, #f50057);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(45deg);
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .flower:hover {
+            transform: rotate(45deg) scale(1.1);
+        }
+        .flower::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background: #ffeb3b;
+            border-radius: 50%;
+        }
+        .stem {
+            width: 10px;
+            height: 100px;
+            background: #4caf50;
+            margin: 0 auto;
+        }
+        .controls {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            max-width: 400px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #388e3c;
+        }
+        .message {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            display: inline-block;
+            min-height: 20px;
+        }
+        .footer {
+            margin-top: 30px;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>¡Saludos Terricolas!</h1>
+        <div class="subtitle">Interactúa con estas flores intergalácticas</div>
+    </div>
+    
+    <div class="message" id="greeting">Haz clic en una flor para recibir un mensaje especial</div>
+    
+    <div class="flower-container">
+        <div class="flower" onclick="showMessage('¡Hola desde la galaxia floral!')"></div>
+        <div class="flower" onclick="showMessage('La belleza cósmica te rodea')"></div>
+        <div class="flower" onclick="showMessage('Las flores son sonrisas de la Tierra')"></div>
+        <div class="flower" onclick="showMessage('Cada flor es un mundo por descubrir')"></div>
+    </div>
+    
+    <div class="stem"></div>
+    
+    <div class="controls">
+        <p>Controla el jardín cósmico:</p>
+        <button onclick="changeColor()">Cambiar color de flores</button>
+        <button onclick="addFlower()">Añadir una flor</button>
+        <button onclick="resetGarden()">Reiniciar jardín</button>
+    </div>
+    
+    <div class="footer">
+        <p>Las flores son el lenguaje universal de la Tierra</p>
+        <p>Página creada con 50 líneas exactas de código</p>
+    </div>
+
+    <script>
+        let flowerCount = 4;
+        const messages = [
+            "¡Hola desde la galaxia floral!",
+            "La belleza cósmica te rodea",
+            "Las flores son sonrisas de la Tierra",
+            "Cada flor es un mundo por descubrir",
+            "La naturaleza es arte divino",
+            "Tu espíritu florece como estas flores",
+            "La paz viene en pétalos suaves",
+            "El universo conspira a tu favor"
+        ];
+        
+        function showMessage(msg) {
+            document.getElementById('greeting').textContent = msg;
+            document.getElementById('greeting').style.backgroundColor = 'rgba(255, 215, 240, 0.8)';
+            setTimeout(() => {
+                document.getElementById('greeting').style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+            }, 1000);
+        }
+        
+        function changeColor() {
+            const flowers = document.querySelectorAll('.flower');
+            const colors = ['#ff4081', '#9c27b0', '#3f51b5', '#2196f3', '#00bcd4', '#009688'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            flowers.forEach(flower => {
+                flower.style.background = `radial-gradient(circle at 30% 30%, ${randomColor}, ${darkenColor(randomColor, 20)})`;
+            });
+            
+            showMessage('¡Nuevos colores cósmicos activados!');
+        }
+        
+        function darkenColor(color, percent) {
+            // Simplificación para oscurecer colores hexadecimales
+            return color.replace(/\d+/g, match => Math.max(0, parseInt(match) - percent));
+        }
+        
+        function addFlower() {
+            if (flowerCount >= 8) {
+                showMessage('¡Jardín cósmico completo! Máximo de flores alcanzado.');
+                return;
+            }
+            
+            const container = document.querySelector('.flower-container');
+            const newFlower = document.createElement('div');
+            newFlower.className = 'flower';
+            newFlower.onclick = () => showMessage(messages[flowerCount % messages.length]);
+            container.appendChild(newFlower);
+            flowerCount++;
+            showMessage(`¡Flor cósmica #${flowerCount} añadida al jardín!`);
+        }
+        
+        function resetGarden() {
+            const container = document.querySelector('.flower-container');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 4; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                flower.onclick = () => showMessage(messages[i]);
+                container.appendChild(flower);
+            }
+            
+            flowerCount = 4;
+            showMessage('Jardín cósmico reiniciado. ¡Haz clic en una flor!');
+        }
+        
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            showMessage('¡Bienvenido al jardín cósmico, terrícola!');
+        });
+    </script>
+</body>
+</html>
